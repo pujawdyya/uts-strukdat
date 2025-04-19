@@ -1,0 +1,82 @@
+import pandas as pd
+import os
+
+# Baca file Excel langsung
+file_excel = "Struktur_Data_Dataset_Kelas_A_B_C (5).xlsx"
+sheet = "Sheet1"
+df = pd.read_excel(file_excel, sheet_name=sheet, skiprows=1)
+
+# Ambil kolom yang relevan (tanpa Abstrak dan Kesimpulan)
+papers = df.iloc[:, [5, 6, 7, 10]].copy()
+papers.columns = ["Judul", "Tahun", "Penulis", "Link"]
+
+# Hapus baris yang kosong di bagian penting
+papers = papers.dropna(subset=["Judul", "Tahun"]).fillna("-")
+
+# Konversi tahun ke integer
+papers["Tahun"] = papers["Tahun"].astype(int)
+
+# Fungsi tampilkan hasil
+
+def tampilkan_paper(baris):
+    print("\n=== HASIL DITEMUKAN ===")
+    print("Judul   :", baris["Judul"])
+    print("Penulis :", baris["Penulis"])
+    print("Tahun   :", baris["Tahun"])
+    print("Link    :", baris["Link"])
+    print("----------------------------")
+
+# Menu pencarian
+while True:
+    os.system('cls' if os.name == 'nt' else 'clear')  # BERSIHKAN LAYAR
+
+    print("=== MENU PENCARIAN PAPER ===")
+    print("1. Cari berdasarkan Judul")
+    print("2. Cari berdasarkan Penulis")
+    print("3. Cari berdasarkan Tahun")
+    print("0. Keluar")
+    pilihan = input("Pilihan: ")
+
+    if pilihan == "1":
+        keyword = input("Masukkan kata kunci judul: ").lower()
+        hasil = papers[papers["Judul"].str.lower().str.contains(keyword)]
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if hasil.empty:
+            print("Tidak ditemukan.")
+        else:
+            for _, row in hasil.iterrows():
+                tampilkan_paper(row)
+        input("\nTekan Enter untuk kembali ke menu...")
+
+    elif pilihan == "2":
+        keyword = input("Masukkan kata kunci penulis: ").lower()
+        hasil = papers[papers["Penulis"].str.lower().str.contains(keyword)]
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if hasil.empty:
+            print("Tidak ditemukan.")
+        else:
+            for _, row in hasil.iterrows():
+                tampilkan_paper(row)
+        input("\nTekan Enter untuk kembali ke menu...")
+
+    elif pilihan == "3":
+        try:
+            tahun = int(input("Masukkan tahun: "))
+            hasil = papers[papers["Tahun"] == tahun]
+            os.system('cls' if os.name == 'nt' else 'clear')
+            if hasil.empty:
+                print("Tidak ditemukan.")
+            else:
+                for _, row in hasil.iterrows():
+                    tampilkan_paper(row)
+        except ValueError:
+            print("Input tahun tidak valid.")
+        input("\nTekan Enter untuk kembali ke menu...")
+
+    elif pilihan == "0":
+        print("Terima kasih!")
+        break
+
+    else:
+        print("Pilihan tidak valid.")
+        input("\nTekan Enter untuk kembali ke menu...")
