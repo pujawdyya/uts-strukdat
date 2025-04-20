@@ -1,6 +1,7 @@
 # Program Pencarian Data Paper
 **Puja Widyasti — 3337240012**
 
+## Deskripsi Singkat
 Program ini dibuat untuk memenuhi Tugas UTS Mata Kuliah Struktur Data.  
 Fungsinya adalah untuk mencari data paper ilmiah berdasarkan **judul**, **penulis**, dan **tahun** menggunakan dua metode pencarian: **Linear Search** dan **Binary Search**.
 
