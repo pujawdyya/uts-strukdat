@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Baca file Excel
-file_excel = "Struktur_Data_Dataset_Kelas_A_B_C (5).xlsx"
+file_excel = "Struktur_Data_Dataset_Kelas_A_B_C.xlsx"
 sheet = "Sheet1"
 df = pd.read_excel(file_excel, sheet_name=sheet, skiprows=1)
 
