@@ -1,5 +1,6 @@
 # UTS STRUKTUR DATA | Program Pencarian Data Paper
 **Puja Widyasti — 3337240012**
+-
 Dibuat untuk memenuhi tugas UTS Struktur Data yang ditugaskan oleh Bapak Cakra Adipura Wicaksana, S.T., M.T
 
 ## 💡 Deskripsi Singkat
